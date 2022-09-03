@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({ Icon, title, onClick }) => {
       }`}
     >
       {Icon && Icon}
-      <p className="text-light-honey">Button</p>
+      <p className="text-light-honey">{title}</p>
     </div>
   )
 }
