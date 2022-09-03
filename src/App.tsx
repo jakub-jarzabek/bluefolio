@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import { Button } from './components'
 function App() {
-  const [count, setCount] = useState(0)
-
-  return <div className="w-10 h-10 bg-red-300"></div>
+  return (
+    <div>
+      <Button title="niebieski" onClick={() => null} />
+    </div>
+  )
 }
 
 export default App
