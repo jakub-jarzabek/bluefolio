@@ -7,4 +7,12 @@ export default defineConfig({
   server: {
     port: 2137,
   },
+  define: {
+    global: {},
+  },
+  resolve: {
+    alias: {
+      './runtimeConfig': './runtimeConfig.browser',
+    },
+  },
 })
