@@ -9,7 +9,7 @@ interface ModalProps {
 }
 export const Modal: React.FC<ModalProps> = ({ setOpen, children }) => {
   return (
-    <div className="absolute top-0 left-0 w-screen h-screen">
+    <div className="fixed top-0 left-0 w-screen h-screen">
       <div
         className="absolute top-0 left-0 w-screen h-screen bg-gray-900 opacity-30 z-10 blur"
         onClick={() => setOpen(false)}
@@ -40,7 +40,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
     return null;
   };
   return (
-    <Modal setOpen={() => null}>
+    <Modal setOpen={setOpen}>
       <div className="flex flex-col items-center gap-2 overflow-hidden ">
         <h1 className="text-violet-russian text-xl font-semibold tracking-wide self-start mb-6">
           {title}
@@ -83,7 +83,7 @@ export const FormModal: React.FC<ProjectModalProps> = ({
   const [imgSrc, setImgSrc] = useState("");
 
   return (
-    <Modal setOpen={() => null}>
+    <Modal setOpen={setOpen}>
       <div className="flex flex-col items-center gap-2 overflow-hidden ">
         <Input
           label="Title"

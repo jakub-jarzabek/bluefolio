@@ -4,10 +4,14 @@ import { Button } from "..";
 interface CardProps {
   title: string;
   imageUrl: string;
+  onClick: () => void;
 }
-export const Card: React.FC<CardProps> = ({ imageUrl, title }) => {
+export const Card: React.FC<CardProps> = ({ imageUrl, title, onClick }) => {
   return (
-    <div className="w-80 flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 rounded border-2 border-violet-spanish p-4 items-center">
+    <div
+      onClick={onClick}
+      className="w-80 flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 rounded border-2 border-violet-spanish p-4 items-center bg-light-honey  cursor-pointer rainbow"
+    >
       <img src={imageUrl} className="w-full h-40 rounded" />
       <h1 className="font-semibold text-2xl text-violet-russian tracking-widest mt-4">
         {title}
