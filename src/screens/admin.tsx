@@ -1,14 +1,16 @@
-import React from "react";
-import { Button, AdminCard, FormModal } from "../components";
+import { withAuthenticator } from '@aws-amplify/ui-react'
+import React from 'react'
+import { Button, AdminCard, FormModal } from '../components'
 
-export const Admin = () => {
-  const [open, setOpen] = React.useState(false);
+const Admin = () => {
+  const [open, setOpen] = React.useState(false)
   const [modalData, setModalData] = React.useState({
-    title: "",
-    url: "",
-    imageUrl: "",
-    description: "",
-  });
+    title: '',
+    url: '',
+    imageUrl: '',
+    description: '',
+  })
+
   return (
     <div className="w-screen h-screen p-4 ">
       <div className="w-full flex flex-col gap-4 bg-light-honey p-4 rounded-xl mt-20">
@@ -17,12 +19,12 @@ export const Admin = () => {
             title="Add"
             onClick={() => {
               setModalData({
-                title: "",
-                url: "",
-                imageUrl: "",
-                description: "",
-              });
-              setOpen(true);
+                title: '',
+                url: '',
+                imageUrl: '',
+                description: '',
+              })
+              setOpen(true)
             }}
           />
         </div>
@@ -31,12 +33,12 @@ export const Admin = () => {
           _id="1231312321"
           handleEdit={() => {
             setModalData({
-              title: "",
-              url: "",
-              imageUrl: "",
-              description: "",
-            });
-            setOpen(true);
+              title: '',
+              url: '',
+              imageUrl: '',
+              description: '',
+            })
+            setOpen(true)
           }}
           handleDelete={() => null}
         />
@@ -63,5 +65,6 @@ export const Admin = () => {
         />
       )}
     </div>
-  );
-};
+  )
+}
+export default withAuthenticator(Admin, { hideSignUp: true })

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { Button, Input } from "..";
-import { BsGithub } from "react-icons/bs";
-import { AiOutlinePlus } from "react-icons/ai";
+import React, { useState } from 'react'
+import { Button, Input } from '..'
+import { BsGithub } from 'react-icons/bs'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { addProject, editProject } from '../../services/project'
+import { updateProject } from '../../graphql/mutations'
 
 interface ModalProps {
-  setOpen: (_: boolean) => void;
-  children: React.ReactNode;
+  setOpen: (_: boolean) => void
+  children: React.ReactNode
 }
 export const Modal: React.FC<ModalProps> = ({ setOpen, children }) => {
   return (
@@ -19,15 +21,15 @@ export const Modal: React.FC<ModalProps> = ({ setOpen, children }) => {
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
 interface ProjectModalProps {
-  title: string;
-  url: string;
-  imageUrl: string;
-  description: string;
-  setOpen: (_: boolean) => void;
+  title: string
+  url: string
+  imageUrl: string
+  description: string
+  setOpen: (_: boolean) => void
 }
 export const ProjectModal: React.FC<ProjectModalProps> = ({
   title,
@@ -37,8 +39,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   setOpen,
 }) => {
   const handleClick = () => {
-    return null;
-  };
+    return null
+  }
   return (
     <Modal setOpen={setOpen}>
       <div className="flex flex-col items-center gap-2 overflow-hidden ">
@@ -54,33 +56,52 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             <BsGithub
               color="white"
               size="16px"
-              style={{ marginRight: "8px" }}
+              style={{ marginRight: '8px' }}
             />
           }
         />
       </div>
     </Modal>
-  );
-};
+  )
+}
 
 interface FormModalProps {
-  title: string;
-  url: string;
-  imageUrl: string;
-  description: string;
-  setOpen: (_: boolean) => void;
+  id?: string
+  title: string
+  url: string
+  imageUrl: string
+  description: string
+  setOpen: (_: boolean) => void
 }
-export const FormModal: React.FC<ProjectModalProps> = ({
+export const FormModal: React.FC<FormModalProps> = ({
   title: propsTitle,
   url: propsUrl,
   imageUrl,
   description,
   setOpen,
+  id,
 }) => {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [url, setUrl] = useState("");
-  const [imgSrc, setImgSrc] = useState("");
+  const [title, setTitle] = useState('')
+  const [desc, setDesc] = useState('')
+  const [url, setUrl] = useState('')
+  const [imgSrc, setImgSrc] = useState('')
+  const handleAdd = async () => {
+    await addProject({
+      title,
+      description: desc,
+      repoUrl: url,
+      imageUrl: imgSrc,
+    })
+  }
+  const handleUpdate = async () => {
+    await editProject({
+      title,
+      description: desc,
+      repoUrl: url,
+      imageUrl: imgSrc,
+      id: id ?? '',
+    })
+  }
 
   return (
     <Modal setOpen={setOpen}>
@@ -116,8 +137,11 @@ export const FormModal: React.FC<ProjectModalProps> = ({
           type="textarea"
         />
 
-      <Button title={propsTitle ? "Edit" : "Add"} onClick={() => null} />
+        <Button
+          title={id ? 'Edit' : 'Add'}
+          onClick={id ? handleUpdate : handleAdd}
+        />
       </div>
     </Modal>
-  );
-};
+  )
+}

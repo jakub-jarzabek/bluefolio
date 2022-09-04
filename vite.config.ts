@@ -7,4 +7,7 @@ export default defineConfig({
   server: {
     port: 2137,
   },
+  define: {
+    global: {},
+  },
 })

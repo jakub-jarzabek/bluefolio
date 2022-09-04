@@ -1,15 +1,16 @@
-import React from "react";
-import { Button, Card, ProjectModal } from "../components";
+import React from 'react'
+import { Button, Card, ProjectModal } from '../components'
+import { listProjects } from '../graphql/queries'
 
 export const Home = () => {
-  const sectionRef = React.useRef<HTMLDivElement>(null);
-  const [open, setOpen] = React.useState(false);
+  const sectionRef = React.useRef<HTMLDivElement>(null)
+  const [open, setOpen] = React.useState(false)
   const [modalData, setModalData] = React.useState({
-    title: "",
-    url: "",
-    imageUrl: "",
-    description: "",
-  });
+    title: '',
+    url: '',
+    imageUrl: '',
+    description: '',
+  })
   return (
     <div className="w-screen  bg-gradient-to-r from-violet-spanish to-violet-russian flex flex-col items-center px-8 pb-10">
       <div className="w-screen h-[800px] flex flex-col items-center justify-center">
@@ -27,7 +28,7 @@ export const Home = () => {
             title="Projects"
             onClick={() =>
               sectionRef &&
-              sectionRef?.current?.scrollIntoView({ behavior: "smooth" })
+              sectionRef?.current?.scrollIntoView({ behavior: 'smooth' })
             }
           />
         </div>
@@ -41,13 +42,13 @@ export const Home = () => {
           imageUrl="https://streamsentials.com/wp-content/uploads/2021/01/pepehands-transparent-pic.png"
           onClick={() => {
             setModalData({
-              title: "test",
+              title: 'test',
               imageUrl:
-                "https://streamsentials.com/wp-content/uploads/2021/01/pepehands-transparent-pic.png",
-              url: "https://google.com",
-              description: "asdadasfsddfg dfgd gdsfg dsfg dsgdsgdfs g",
-            });
-            setOpen(true);
+                'https://streamsentials.com/wp-content/uploads/2021/01/pepehands-transparent-pic.png',
+              url: 'https://google.com',
+              description: 'asdadasfsddfg dfgd gdsfg dsfg dsgdsgdfs g',
+            })
+            setOpen(true)
           }}
         />
         {open && (
@@ -61,5 +62,5 @@ export const Home = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
