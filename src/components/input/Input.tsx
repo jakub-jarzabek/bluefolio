@@ -5,12 +5,14 @@ interface InputProps {
   placeholder: string;
   onChange: (_: string) => void;
   type: "text" | "password" | "textarea";
+  testID?:string
 }
 export const Input: React.FC<InputProps> = ({
   label,
   placeholder,
   onChange,
   type,
+  testID
 }) => {
   return (
     <div className='w-full'>
@@ -25,12 +27,14 @@ export const Input: React.FC<InputProps> = ({
       <div className="relative mt-1 rounded shadow-sm">
         {type === "textarea" ? (
           <textarea
+            data-testID={testID}
             onChange={(e) => onChange(e.target.value)}
             className="block w-full rounded border-violet-russian px-2 focus:border-violet-russian focus:via-violet-russian sm:text-sm"
             placeholder={placeholder}
           />
         ) : (
           <input
+            data-testID={testID}
             onChange={(e) => onChange(e.target.value)}
             type={type}
             className="block w-full rounded border-violet-russian px-2 focus:border-violet-russian focus:via-violet-russian sm:text-sm"
