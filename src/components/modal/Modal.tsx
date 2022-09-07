@@ -8,10 +8,13 @@ import { updateProject } from '../../graphql/mutations'
 interface ModalProps {
   setOpen: (_: boolean) => void
   children: React.ReactNode
+  testID?:string
 }
-export const Modal: React.FC<ModalProps> = ({ setOpen, children }) => {
+export const Modal: React.FC<ModalProps> = ({ setOpen, children, testID }) => {
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen">
+    <div 
+      data-testID={testID}
+      className="fixed top-0 left-0 w-screen h-screen">
       <div
         className="absolute top-0 left-0 w-screen h-screen bg-gray-900 opacity-30 z-10 blur"
         onClick={() => setOpen(false)}
@@ -29,6 +32,7 @@ interface ProjectModalProps {
   url: string
   imageUrl: string
   description: string
+  testID?:string
   setOpen: (_: boolean) => void
 }
 export const ProjectModal: React.FC<ProjectModalProps> = ({
@@ -36,6 +40,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   url,
   imageUrl,
   description,
+  testID,
   setOpen,
 }) => {
   const handleClick = () => {
@@ -67,6 +72,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
 interface FormModalProps {
   id?: string
+  testID?: string
   title: string
   url: string
   imageUrl: string
@@ -80,6 +86,7 @@ export const FormModal: React.FC<FormModalProps> = ({
   description,
   setOpen,
   id,
+  testID,
 }) => {
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
@@ -104,8 +111,9 @@ export const FormModal: React.FC<FormModalProps> = ({
   }
 
   return (
-    <Modal setOpen={setOpen}>
-      <div className="flex flex-col items-center gap-2 overflow-hidden ">
+    <Modal data-testID={testID} setOpen={setOpen}>
+      <div 
+        className="flex flex-col items-center gap-2 overflow-hidden ">
         <Input
           label="Title"
           onChange={(e) => setTitle(e)}

@@ -1,13 +1,13 @@
 /// <reference types="Cypress" />
 import React from 'react'
 import { Button } from './Button'
-const HomeButton = '[data-testid="moj_button"]'
+const HomeButton = '[data-testid="my_button"]'
 
 const WrapperComponenet = () =>{
   const [color,setColor]=React.useState('red')
   return(
     <>
-    <Button title="text" testID={'moj_button'} onClick={() => setColor('green') } />
+    <Button title="text" testID={'my_button'} onClick={() => setColor('green') } />
     <div id='testDIV' style={{backgroundColor:color, width:'10px', height:'10px'}}></div>
     </>
   )
@@ -42,7 +42,7 @@ describe('Button', () => {
   })
 
   it('Should have div with red color',()=>{
-    cy.get('[data-testid="moj_button"]').click()
+    cy.get('[data-testid="my_button"]').click()
     cy.get('#testDIV').should('have.css','background-color', 'rgb(0, 128, 0)')
   })
   })
