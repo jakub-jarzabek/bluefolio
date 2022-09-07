@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateProject = /* GraphQL */ `
-  subscription OnCreateProject($filter: ModelSubscriptionProjectFilterInput) {
-    onCreateProject(filter: $filter) {
+  subscription OnCreateProject($owner: String) {
+    onCreateProject(owner: $owner) {
       id
       title
       description
@@ -12,12 +12,13 @@ export const onCreateProject = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateProject = /* GraphQL */ `
-  subscription OnUpdateProject($filter: ModelSubscriptionProjectFilterInput) {
-    onUpdateProject(filter: $filter) {
+  subscription OnUpdateProject($owner: String) {
+    onUpdateProject(owner: $owner) {
       id
       title
       description
@@ -25,12 +26,13 @@ export const onUpdateProject = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteProject = /* GraphQL */ `
-  subscription OnDeleteProject($filter: ModelSubscriptionProjectFilterInput) {
-    onDeleteProject(filter: $filter) {
+  subscription OnDeleteProject($owner: String) {
+    onDeleteProject(owner: $owner) {
       id
       title
       description
@@ -38,6 +40,7 @@ export const onDeleteProject = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      owner
     }
   }
 `;
