@@ -32,9 +32,9 @@ export const Navbar = () => {
   const location = useLocation()
   return (
     <div
-      className={` z-40 flex flex-row w-[95%] mx-auto h-16 py-2 px-4 fixed ${
+      className={` z-40 flex flex-row w-[95%] mx-auto h-20 py-2 px-4 fixed ${
         show ? 'top-4' : '-top-32'
-      } rounded-xl  justify-between items-center left-1/2 -translate-x-1/2 glass bg-light-honey neon-light transition-all duration-300`}
+      } rounded-xl  justify-between items-center left-1/2 -translate-x-1/2 glass bg-light-honey neon-light transition-all duration-300 border-2 border-blue-400 py-4`}
     >
       <div className="h-full flex flex-row gap-4">
         <img src={logo} className="h-full shadow-xl rounded-full neon-light" />

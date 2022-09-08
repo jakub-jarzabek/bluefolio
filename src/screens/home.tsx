@@ -60,7 +60,7 @@ export const Home = () => {
           </div>
         </div>
         <div
-          className="w-screen flex flex-row justify-around gap-10  flex-wrap items-center px-10 pt-16 relative overflow-hidden py-12"
+          className="w-screen flex flex-row justify-around gap-10 flex-wrap items-center px-10 pt-16 relative overflow-hidden py-16 min-h-[600px]"
           ref={sectionRef}
         >
           <CardsBlob />
