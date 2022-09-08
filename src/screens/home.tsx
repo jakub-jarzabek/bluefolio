@@ -35,16 +35,19 @@ export const Home = () => {
     <>
       <div className="w-screen relative bg-gradient-to-r from-violet-spanish to-violet-russian flex flex-col items-center px-8 pb-10 overflow-x-hidden">
         <BackgroundBlob />
-        <div className="w-screen h-[800px] flex flex-col items-center justify-center z-10 overflow-hidden relative">
-          <h1 className="text-light-timber text-xl font-semibold mb-20 text-center">
-            Hi I'm Kacper Biegajlo Automation Testeser with passion for coding
-            and cat girls. Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry. Lorem Ipsum has been the industry's standard
-            dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen book. It has
-            survived not only five centuries, but also the leap into electronic
-            typesetting, remaining essentially unchanged
+        <div className="w-screen h-[800px] flex flex-col items-center justify-center z-10 overflow-hidden relative px-8">
+          <h1 className="text-4xl font-semibold mb-4 text-center uppercase tracking-widest text-gradient">
+            Hi I'm Kacper Biegajło
           </h1>
+          <h2 className="text-light-timber text-xl font-semibold mb-20 text-center">
+            I'm Automation Testeser with passion for coding and cat girls. Lorem
+            Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since
+            the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only
+            five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged
+          </h2>
 
           <div className="w-60">
             <Button
