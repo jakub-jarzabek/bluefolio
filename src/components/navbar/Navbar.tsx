@@ -63,7 +63,7 @@ export const Navbar = () => {
           </p>
         ) : (
           <p
-            onClick={() => Auth.signOut().then(() => navigate('home'))}
+            onClick={() => Auth.signOut().then(() => navigate('/'))}
             className=" px-3 py-1 rounded-xl text-md text-violet-russian font-semibold tracking-wide border-2 border-violet-russian hover:bg-violet-russian hover:text-light-honey transition-colors duration-300 cursor-pointer"
           >
             Log Out
