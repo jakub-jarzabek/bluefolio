@@ -23,6 +23,17 @@ body {
 }
 
 @layer utilities {
+  .text-neon:hover {
+    text-shadow: 0 0 0.125em #0ff, 0 0 0.45em rgb(96 165 250);
+    cursor: pointer;
+    transition-duration: 0.3s;
+  }
+  .neon-light {
+    box-shadow: 0 0 5px 1px #fff, 0 0 9px 5px #0ff;
+  }
+  .neon-multiple {
+    box-shadow: 0 0 10px 1px #fff, 0 0 20px 10px #f0f, 0 0 25px 20px #0ff;
+  }
   .glass {
     background: rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);

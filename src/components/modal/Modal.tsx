@@ -34,13 +34,16 @@ export const Modal: React.FC<ModalProps> = ({ setOpen, children }) => {
   }
   return (
     <StyleRoot>
-      <div className="fixed top-0 left-0 w-screen h-screen" style={animation}>
+      <div
+        className="fixed top-0 left-0 w-screen h-screen z-50"
+        style={animation}
+      >
         <div
-          className="absolute top-0 left-0 w-screen h-screen bg-gray-900 opacity-30 z-10 blur"
+          className="absolute top-0 left-0 w-screen h-screen bg-gray-900 opacity-40 z-10 blur"
           onClick={handleSetOpen}
         ></div>
 
-        <div className="relative z-20 w-[600px] mt-20 mx-auto bg-light-timber rounded-xl shadow-2xl p-4">
+        <div className="relative  z-20 w-[600px] mt-20 mx-auto bg-light-timber rounded-xl shadow-2xl p-4 glass">
           {children}
         </div>
       </div>
@@ -67,7 +70,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   }
   return (
     <Modal setOpen={setOpen}>
-      <div className="flex flex-col items-center gap-2 overflow-hidden ">
+      <div className="flex flex-col items-center gap-2 overflow-hidden p-4 pb-10">
         <h1 className="text-violet-russian text-xl font-semibold tracking-wide self-start mb-6">
           {title}
         </h1>
