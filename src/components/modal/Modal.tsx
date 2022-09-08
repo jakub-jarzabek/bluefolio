@@ -36,7 +36,7 @@ export const Modal: React.FC<ModalProps> = ({ setOpen, children }) => {
     <StyleRoot>
       <div
         className="fixed top-0 left-0 w-screen h-screen z-50"
-        style={animation}
+        style={animation as any}
       >
         <div
           className="absolute top-0 left-0 w-screen h-screen bg-gray-900 opacity-40 z-10 blur"

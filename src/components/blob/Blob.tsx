@@ -1,5 +1,9 @@
 import { Blob } from 'react-blob'
-export const BackgroundBlob = ({ style, props }) => (
+interface BlobProps {
+  style?: any
+  props?: any
+}
+export const BackgroundBlob: React.FC<BlobProps> = ({ style, props }) => (
   <>
     <Blob
       size="700px"
@@ -34,7 +38,7 @@ export const BackgroundBlob = ({ style, props }) => (
   </>
 )
 
-export const CardsBlob = ({ style, props }) => (
+export const CardsBlob: React.FC<BlobProps> = ({ style, props }) => (
   <>
     <Blob
       size="400px"
