@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { fadeIn, fadeOut } from 'react-animations'
 // @ts-ignore
 import Radium, { StyleRoot } from 'radium'
+import { useNavigate } from 'react-router-dom'
 
 const styles = {
   fadeIn: {
@@ -65,8 +66,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   description,
   setOpen,
 }) => {
+  console.log({ description })
   const handleClick = () => {
-    return null
+    window.location = url as Location & string
   }
   return (
     <Modal setOpen={setOpen}>
@@ -75,7 +77,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           {title}
         </h1>
         <img src={imageUrl} className="w-full rounded h-auto" />
-        <p className="text-md text-violet-russian my-4 w-full">{description}</p>
+        <p className="text-md text-light-honey my-4 w-full">{description}</p>
         <Button
           title="Repo"
           onClick={handleClick}

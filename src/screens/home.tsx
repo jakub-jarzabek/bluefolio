@@ -10,7 +10,7 @@ import { fetchProjects } from '../services/project'
 
 interface ProjectType {
   id: string
-  descritpion: string
+  description: string
   imageUrl: string
   repoUrl: string
   title: string
@@ -74,7 +74,7 @@ export const Home = () => {
                     title: _.title,
                     imageUrl: _.imageUrl,
                     url: _.repoUrl,
-                    description: _.descritpion,
+                    description: _.description,
                   })
                   setOpen(true)
                 }}

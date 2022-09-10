@@ -1,4 +1,4 @@
-import { Auth } from 'aws-amplify'
+import { Auth, Hub } from 'aws-amplify'
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import logo from '../../assets/blue.png'
@@ -6,6 +6,7 @@ import logo from '../../assets/blue.png'
 export const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0)
   const [show, setShow] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const controlNavbar = () => {
     if (typeof window !== 'undefined') {
       if (window.scrollY > lastScrollY) {
@@ -27,6 +28,19 @@ export const Navbar = () => {
       }
     }
   }, [lastScrollY])
+
+  useEffect(() => {
+    Hub.listen('auth', (data) => {
+      switch (data.payload.event) {
+        case 'signIn':
+          setIsAuthenticated(true)
+          break
+        case 'signOut':
+          setIsAuthenticated(false)
+          break
+      }
+    })
+  }, [])
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -62,12 +76,14 @@ export const Navbar = () => {
             Admin
           </p>
         ) : (
-          <p
-            onClick={() => Auth.signOut().then(() => navigate('/'))}
-            className=" px-3 py-1 rounded-xl text-md text-violet-russian font-semibold tracking-wide border-2 border-violet-russian hover:bg-violet-russian hover:text-light-honey transition-colors duration-300 cursor-pointer"
-          >
-            Log Out
-          </p>
+          isAuthenticated && (
+            <p
+              onClick={() => Auth.signOut().then(() => navigate('/'))}
+              className=" px-3 py-1 rounded-xl text-md text-violet-russian font-semibold tracking-wide border-2 border-violet-russian hover:bg-violet-russian hover:text-light-honey transition-colors duration-300 cursor-pointer neon-light"
+            >
+              Log Out
+            </p>
+          )
         )}
       </div>
     </div>
