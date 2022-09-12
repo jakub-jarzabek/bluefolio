@@ -6,6 +6,7 @@ interface InputProps {
   onChange: (_: string) => void;
   type: "text" | "password" | "textarea";
   testID?:string
+  value:string
 
 }
 export const Input: React.FC<InputProps> = ({
@@ -13,7 +14,7 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   onChange,
   type,
-  testID
+  testID,
   value,
 }) => {
   return (

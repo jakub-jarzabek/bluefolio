@@ -24,11 +24,6 @@ interface ModalProps {
   children: React.ReactNode
   testID?:string
 }
-export const Modal: React.FC<ModalProps> = ({ setOpen, children, testID }) => {
-  return (
-    <div 
-      data-testID={testID}
-      className="fixed top-0 left-0 w-screen h-screen">
 
 export const Modal: React.FC<ModalProps> = ({ setOpen, children }) => {
   const [animation, setAnimation] = useState(styles.fadeIn)
