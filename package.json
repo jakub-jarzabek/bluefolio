@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "PORT=2137 vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "yarn dev & yarn cypress run && fg"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^3.5.0",
