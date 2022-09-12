@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "yarn dev & yarn cypress run && fg"
   },
   "dependencies": {
     "@aws-amplify/ui-components": "^1.9.6",

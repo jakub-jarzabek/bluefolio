@@ -22,7 +22,13 @@ const styles = {
 interface ModalProps {
   setOpen: (_: boolean) => void
   children: React.ReactNode
+  testID?:string
 }
+export const Modal: React.FC<ModalProps> = ({ setOpen, children, testID }) => {
+  return (
+    <div 
+      data-testID={testID}
+      className="fixed top-0 left-0 w-screen h-screen">
 
 export const Modal: React.FC<ModalProps> = ({ setOpen, children }) => {
   const [animation, setAnimation] = useState(styles.fadeIn)
@@ -57,6 +63,7 @@ interface ProjectModalProps {
   url: string
   imageUrl: string
   description: string
+  testID?:string
   setOpen: (_: boolean) => void
 }
 export const ProjectModal: React.FC<ProjectModalProps> = ({
@@ -64,6 +71,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   url,
   imageUrl,
   description,
+  testID,
   setOpen,
 }) => {
   console.log({ description })
@@ -96,6 +104,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
 interface FormModalProps {
   id?: string
+  testID?: string
   title: string
   url: string
   imageUrl: string
@@ -110,6 +119,7 @@ export const FormModal: React.FC<FormModalProps> = ({
   description,
   setOpen,
   id,
+  testID,
 }) => {
   const [title, setTitle] = useState(propsTitle ?? '')
   const [desc, setDesc] = useState(description ?? '')
@@ -137,8 +147,9 @@ export const FormModal: React.FC<FormModalProps> = ({
   }
 
   return (
-    <Modal setOpen={setOpen}>
-      <div className="flex flex-col items-center gap-2 overflow-hidden ">
+    <Modal data-testID={testID} setOpen={setOpen}>
+      <div 
+        className="flex flex-col items-center gap-2 overflow-hidden ">
         <Input
           label="Title"
           onChange={(e) => setTitle(e)}
