@@ -11,7 +11,7 @@ export const Button: React.FC<ButtonProps> = ({ Icon, title, onClick,testID }) =
     <div
       data-testID={testID}
       onClick={onClick}
-      className={`py-3 px-6 bg-violet-spanish font-semibold tracking-widest rounded-md shadow-sm flex flex-row justify-center items-center cursor-pointer hover:bg-violet-600 trasition-colors duration-500 ${
+      className={`py-3 px-6 bg-violet-spanish font-semibold tracking-widest rounded-md shadow-sm flex flex-row justify-center items-center cursor-pointer hover:bg-violet-600 trasition-colors duration-500 neon-multiple ${
         Icon ? 'justify-around' : ''
       }`}
     >

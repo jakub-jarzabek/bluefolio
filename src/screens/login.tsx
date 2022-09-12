@@ -13,12 +13,14 @@ export const Login = () => {
     <div className="w-screen h-screen">
       <div className="w-[500px] mx-auto glass flex flex-col gap-6 items-center p-4 mt-40">
         <Input
+          value=""
           label="Login"
           placeholder="Login"
           type="text"
           onChange={(e) => setLogin(e)}
         />
         <Input
+          value=""
           label="Password"
           placeholder="Password"
           type="password"

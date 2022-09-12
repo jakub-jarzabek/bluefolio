@@ -1,4 +1,4 @@
-import { API, graphqlOperation } from 'aws-amplify'
+import { API, Auth, graphqlOperation } from 'aws-amplify'
 import { listProjects } from '../graphql/queries'
 import {
   createProject,
@@ -12,8 +12,11 @@ import {
 } from '../API'
 export async function fetchProjects() {
   try {
-    const projects = await API.graphql(graphqlOperation(listProjects))
-    console.log(projects)
+    const projects = await API.graphql({
+      query: listProjects,
+      authMode: 'API_KEY',
+    })
+    return projects
   } catch (err) {
     console.log('Error fetching projects')
   }
@@ -25,11 +28,15 @@ export async function addProject({
   imageUrl,
 }: CreateProjectInput) {
   try {
-    await API.graphql(
-      graphqlOperation(createProject, {
-        input: { title, description, repoUrl, imageUrl },
-      })
-    )
+    const auth = await Auth.currentSession()
+    const token = auth.getAccessToken().getJwtToken()
+    console.log({ token })
+    await API.graphql({
+      query: createProject,
+      variables: { input: { title, description, repoUrl, imageUrl } },
+      authMode: 'AMAZON_COGNITO_USER_POOLS',
+      authToken: token,
+    })
   } catch (err) {
     console.log('error creating Project:', err)
   }
@@ -42,11 +49,14 @@ export async function editProject({
   imageUrl,
 }: UpdateProjectInput) {
   try {
-    await API.graphql(
-      graphqlOperation(updateProject, {
-        input: { id, title, description, repoUrl, imageUrl },
-      })
-    )
+    const auth = await Auth.currentSession()
+    const token = auth.getAccessToken().getJwtToken()
+    await API.graphql({
+      query: updateProject,
+      variables: { input: { title, description, repoUrl, imageUrl, id } },
+      authMode: 'AMAZON_COGNITO_USER_POOLS',
+      authToken: token,
+    })
   } catch (err) {
     console.log('error editing Project:', err)
   }
@@ -54,11 +64,14 @@ export async function editProject({
 
 export async function removeProject({ id }: DeleteProjectInput) {
   try {
-    await API.graphql(
-      graphqlOperation(deleteProject, {
-        input: { id },
-      })
-    )
+    const auth = await Auth.currentSession()
+    const token = auth.getAccessToken().getJwtToken()
+    await API.graphql({
+      query: deleteProject,
+      variables: { input: { id } },
+      authMode: 'AMAZON_COGNITO_USER_POOLS',
+      authToken: token,
+    })
   } catch (err) {
     console.log('error removing project:', err)
   }

@@ -1,9 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Input } from '..'
 import { BsGithub } from 'react-icons/bs'
-import { AiOutlinePlus } from 'react-icons/ai'
 import { addProject, editProject } from '../../services/project'
-import { updateProject } from '../../graphql/mutations'
+import { toast } from 'react-toastify'
+import { fadeIn, fadeOut } from 'react-animations'
+// @ts-ignore
+import Radium, { StyleRoot } from 'radium'
+import { useNavigate } from 'react-router-dom'
+
+const styles = {
+  fadeIn: {
+    animation: 'x 1s',
+    animationName: Radium.keyframes(fadeIn, 'fadeIn'),
+  },
+  fadeOut: {
+    animation: 'x 1s',
+    animationName: Radium.keyframes(fadeOut, 'fadeOut'),
+  },
+}
 
 interface ModalProps {
   setOpen: (_: boolean) => void
@@ -15,15 +29,32 @@ export const Modal: React.FC<ModalProps> = ({ setOpen, children, testID }) => {
     <div 
       data-testID={testID}
       className="fixed top-0 left-0 w-screen h-screen">
-      <div
-        className="absolute top-0 left-0 w-screen h-screen bg-gray-900 opacity-30 z-10 blur"
-        onClick={() => setOpen(false)}
-      ></div>
 
-      <div className="relative z-20 w-[600px] mt-20 mx-auto bg-light-timber rounded-xl shadow-2xl p-4">
-        {children}
+export const Modal: React.FC<ModalProps> = ({ setOpen, children }) => {
+  const [animation, setAnimation] = useState(styles.fadeIn)
+
+  const handleSetOpen = () => {
+    setAnimation(styles.fadeOut)
+    setTimeout(() => {
+      setOpen(false)
+    }, 900)
+  }
+  return (
+    <StyleRoot>
+      <div
+        className="fixed top-0 left-0 w-screen h-screen z-50"
+        style={animation as any}
+      >
+        <div
+          className="absolute top-0 left-0 w-screen h-screen bg-gray-900 opacity-40 z-10 blur"
+          onClick={handleSetOpen}
+        ></div>
+
+        <div className="relative  z-20 w-[600px] mt-20 mx-auto bg-light-timber rounded-xl shadow-2xl p-4 glass">
+          {children}
+        </div>
       </div>
-    </div>
+    </StyleRoot>
   )
 }
 
@@ -43,17 +74,18 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   testID,
   setOpen,
 }) => {
+  console.log({ description })
   const handleClick = () => {
-    return null
+    window.location = url as Location & string
   }
   return (
     <Modal setOpen={setOpen}>
-      <div className="flex flex-col items-center gap-2 overflow-hidden ">
+      <div className="flex flex-col items-center gap-2 overflow-hidden p-4 pb-10">
         <h1 className="text-violet-russian text-xl font-semibold tracking-wide self-start mb-6">
           {title}
         </h1>
         <img src={imageUrl} className="w-full rounded h-auto" />
-        <p className="text-md text-violet-russian my-4 w-full">{description}</p>
+        <p className="text-md text-light-honey my-4 w-full">{description}</p>
         <Button
           title="Repo"
           onClick={handleClick}
@@ -79,6 +111,7 @@ interface FormModalProps {
   description: string
   setOpen: (_: boolean) => void
 }
+
 export const FormModal: React.FC<FormModalProps> = ({
   title: propsTitle,
   url: propsUrl,
@@ -88,10 +121,11 @@ export const FormModal: React.FC<FormModalProps> = ({
   id,
   testID,
 }) => {
-  const [title, setTitle] = useState('')
-  const [desc, setDesc] = useState('')
-  const [url, setUrl] = useState('')
-  const [imgSrc, setImgSrc] = useState('')
+  const [title, setTitle] = useState(propsTitle ?? '')
+  const [desc, setDesc] = useState(description ?? '')
+  const [url, setUrl] = useState(propsUrl ?? '')
+  const [imgSrc, setImgSrc] = useState(imageUrl ?? '')
+
   const handleAdd = async () => {
     await addProject({
       title,
@@ -99,6 +133,7 @@ export const FormModal: React.FC<FormModalProps> = ({
       repoUrl: url,
       imageUrl: imgSrc,
     })
+    toast.success('Pomyslnie dodano projekt')
   }
   const handleUpdate = async () => {
     await editProject({
@@ -108,6 +143,7 @@ export const FormModal: React.FC<FormModalProps> = ({
       imageUrl: imgSrc,
       id: id ?? '',
     })
+    toast.success('Pomyslnie zaktualizowano projekt')
   }
 
   return (
@@ -117,6 +153,7 @@ export const FormModal: React.FC<FormModalProps> = ({
         <Input
           label="Title"
           onChange={(e) => setTitle(e)}
+          value={title}
           placeholder="Title"
           type="text"
         />
@@ -125,24 +162,23 @@ export const FormModal: React.FC<FormModalProps> = ({
           onChange={(e) => setUrl(e)}
           placeholder="Repo Url"
           type="text"
+          value={url}
         />
 
-        {imageUrl ? (
-          <img
-            src={imageUrl}
-            className="w-32 h-32 bg-light-honey border border-violet-russian shadow-md rounded-xl cursor-pointer hover:shadow-2xl transition-all duration-300"
-          />
-        ) : (
-          <div className="w-32 h-32 bg-light-honey border border-violet-russian shadow-md rounded-xl flex flex-col justify-center items-center cursor-pointer hover:shadow-2xl transition-all duration-300">
-            <AiOutlinePlus size="32px" color="#23022E" />
-          </div>
-        )}
+        <Input
+          label="Image Url"
+          onChange={(e) => setImgSrc(e)}
+          placeholder="Image Src"
+          type="text"
+          value={imgSrc}
+        />
 
         <Input
           label="Description"
           onChange={(e) => setDesc(e)}
           placeholder="Description"
           type="textarea"
+          value={desc}
         />
 
         <Button

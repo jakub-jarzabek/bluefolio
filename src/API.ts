@@ -69,6 +69,7 @@ export type Project = {
   imageUrl: string,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type UpdateProjectInput = {
@@ -116,46 +117,6 @@ export type ModelProjectConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionProjectFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  title?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  repoUrl?: ModelSubscriptionStringInput | null,
-  imageUrl?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionProjectFilterInput | null > | null,
-  or?: Array< ModelSubscriptionProjectFilterInput | null > | null,
-};
-
-export type ModelSubscriptionIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
 export type CreateProjectMutationVariables = {
   input: CreateProjectInput,
   condition?: ModelProjectConditionInput | null,
@@ -171,6 +132,7 @@ export type CreateProjectMutation = {
     imageUrl: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -189,6 +151,7 @@ export type UpdateProjectMutation = {
     imageUrl: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -207,6 +170,7 @@ export type DeleteProjectMutation = {
     imageUrl: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -224,6 +188,7 @@ export type GetProjectQuery = {
     imageUrl: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -245,13 +210,14 @@ export type ListProjectsQuery = {
       imageUrl: string,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type OnCreateProjectSubscriptionVariables = {
-  filter?: ModelSubscriptionProjectFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateProjectSubscription = {
@@ -264,11 +230,12 @@ export type OnCreateProjectSubscription = {
     imageUrl: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateProjectSubscriptionVariables = {
-  filter?: ModelSubscriptionProjectFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateProjectSubscription = {
@@ -281,11 +248,12 @@ export type OnUpdateProjectSubscription = {
     imageUrl: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteProjectSubscriptionVariables = {
-  filter?: ModelSubscriptionProjectFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteProjectSubscription = {
@@ -298,5 +266,6 @@ export type OnDeleteProjectSubscription = {
     imageUrl: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };

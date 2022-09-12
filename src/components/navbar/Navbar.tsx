@@ -1,27 +1,90 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Auth, Hub } from 'aws-amplify'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import logo from '../../assets/blue.png'
 
 export const Navbar = () => {
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [show, setShow] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const controlNavbar = () => {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY > lastScrollY) {
+        setShow(false)
+      } else {
+        setShow(true)
+      }
+
+      setLastScrollY(window.scrollY)
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar)
+
+      return () => {
+        window.removeEventListener('scroll', controlNavbar)
+      }
+    }
+  }, [lastScrollY])
+
+  useEffect(() => {
+    Hub.listen('auth', (data) => {
+      switch (data.payload.event) {
+        case 'signIn':
+          setIsAuthenticated(true)
+          break
+        case 'signOut':
+          setIsAuthenticated(false)
+          break
+      }
+    })
+  }, [])
+
   const navigate = useNavigate()
+  const location = useLocation()
   return (
-    <div className="mt-2 z-40 flex flex-row w-[95%] mx-auto h-14 py-2 px-4 fixed top-0 rounded-xl  justify-between items-center shadow-md left-1/2 -translate-x-1/2 glass bg-light-honey">
-      <img
-        src="https://streamsentials.com/wp-content/uploads/2021/01/pepehands-transparent-pic.png"
-        className="h-full shadow-xl"
-      />
+    <div
+      className={` z-40 flex flex-row w-[95%] mx-auto h-20 py-2 px-4 fixed ${
+        show ? 'top-4' : '-top-32'
+      } rounded-xl  justify-between items-center left-1/2 -translate-x-1/2 glass bg-light-honey neon-light transition-all duration-300 border-2 border-blue-400 py-4`}
+    >
+      <div className="h-full flex flex-row gap-4">
+        <img src={logo} className="h-full shadow-xl rounded-full neon-light" />
+        <div className="flex flex-col justify-center gap-1 translate-y-0.5">
+          <p className="text-blue-400 font-mono leading-none text-xl tracking-widest text-neon">
+            Kacper
+          </p>
+          <p className="text-blue-400 font-mono leading-none text-xl tracking-widest text-neon">
+            Biegajło
+          </p>
+        </div>
+      </div>
       <div className="flex flex-row gap-4 items-center">
         <p
           onClick={() => navigate('/')}
-          className=" px-3 py-1 rounded-xl text-md text-violet-russian font-semibold tracking-wide border-2 border-violet-spanish  hover:bg-violet-spanish hover:text-light-honey transition-colors duration-300 cursor-pointer"
+          className=" px-3 py-1 rounded-xl text-md text-violet-russian font-semibold tracking-wide border-2 border-violet-russian  hover:bg-violet-russian hover:text-light-honey transition-colors duration-300 cursor-pointer neon-light"
         >
           Home
         </p>
-        <p
-          onClick={() => navigate('admin')}
-          className=" px-3 py-1 rounded-xl text-md text-violet-russian font-semibold tracking-wide border-2 border-violet-spanish hover:bg-violet-spanish hover:text-light-honey transition-colors duration-300 cursor-pointer"
-        >
-          Admin
-        </p>
+        {location.pathname !== '/admin' ? (
+          <p
+            onClick={() => navigate('admin')}
+            className=" px-3 py-1 rounded-xl text-md text-violet-russian font-semibold tracking-wide border-2 border-violet-russian hover:bg-violet-russian hover:text-light-honey transition-colors duration-300 cursor-pointer neon-light"
+          >
+            Admin
+          </p>
+        ) : (
+          isAuthenticated && (
+            <p
+              onClick={() => Auth.signOut().then(() => navigate('/'))}
+              className=" px-3 py-1 rounded-xl text-md text-violet-russian font-semibold tracking-wide border-2 border-violet-russian hover:bg-violet-russian hover:text-light-honey transition-colors duration-300 cursor-pointer neon-light"
+            >
+              Log Out
+            </p>
+          )
+        )}
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 interface InputProps {
   label?: string;
@@ -6,6 +6,7 @@ interface InputProps {
   onChange: (_: string) => void;
   type: "text" | "password" | "textarea";
   testID?:string
+
 }
 export const Input: React.FC<InputProps> = ({
   label,
@@ -13,9 +14,10 @@ export const Input: React.FC<InputProps> = ({
   onChange,
   type,
   testID
+  value,
 }) => {
   return (
-    <div className='w-full'>
+    <div className="w-full">
       {label && (
         <label
           htmlFor="price"
@@ -25,23 +27,25 @@ export const Input: React.FC<InputProps> = ({
         </label>
       )}
       <div className="relative mt-1 rounded shadow-sm">
-        {type === "textarea" ? (
+        {type === 'textarea' ? (
           <textarea
             data-testID={testID}
             onChange={(e) => onChange(e.target.value)}
-            className="block w-full rounded border-violet-russian px-2 focus:border-violet-russian focus:via-violet-russian sm:text-sm"
+            className="block w-full rounded border-violet-russian px-2 focus:border-violet-russian focus:via-violet-russian sm:text-sm text-black"
             placeholder={placeholder}
+            value={value}
           />
         ) : (
           <input
             data-testID={testID}
             onChange={(e) => onChange(e.target.value)}
             type={type}
-            className="block w-full rounded border-violet-russian px-2 focus:border-violet-russian focus:via-violet-russian sm:text-sm"
+            className="block w-full rounded border-violet-russian px-2 focus:border-violet-russian focus:via-violet-russian sm:text-sm text-black"
             placeholder={placeholder}
+            value={value}
           />
         )}
       </div>
     </div>
-  );
-};
+  )
+}

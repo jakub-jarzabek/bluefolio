@@ -4,21 +4,31 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "PORT=2137 vite",
+    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "yarn dev & yarn cypress run && fg"
   },
   "dependencies": {
+    "@aws-amplify/ui-components": "^1.9.6",
     "@aws-amplify/ui-react": "^3.5.0",
+    "@types/react-toastify": "^4.1.0",
     "aws-amplify": "^4.3.34",
+    "radium": "^0.26.2",
     "react": "^18.2.0",
+    "react-animations": "^1.0.0",
+    "react-blob": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
-    "react-router-dom": "6"
+    "react-router-dom": "6",
+    "react-toastify": "^9.0.8",
+    "styled-components": "^5.3.5",
+    "vite-plugin-require": "^1.0.1"
   },
   "devDependencies": {
+    "@types/radium": "^0.24.4",
     "@types/react": "^18.0.17",
+    "@types/react-animations": "^1.0.0",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
     "autoprefixer": "^10.4.8",
@@ -27,7 +37,8 @@
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.6.4",
-    "vite": "^3.0.7"
+    "vite": "^3.0.7",
+    "vite-plugin-require-transform": "^1.0.3"
   },
   "volta": {
     "node": "16.15.1"
