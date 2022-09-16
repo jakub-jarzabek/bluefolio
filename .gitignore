@@ -46,5 +46,6 @@ amplifytools.xcconfig
 **.sample
 #amplify-do-not-edit-end
 
-cypress.env.json
+
+*.env.json
 cypress.env.json
