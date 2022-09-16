@@ -40,13 +40,10 @@ export const Home = () => {
             Hi I'm Kacper Biegajło
           </h1>
           <h2 className="text-light-timber text-xl font-semibold mb-20 text-center">
-            I'm Automation Testeser with passion for coding and cat girls. Lorem
-            Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since
-            the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged
+            QA Automation Engineer in (Cypress&JavaScript / Selenium&Python).
+            Constantly striving to develop my skills in the usage of the newest
+            technologies and testing solutions. Always curious and keen on
+            working in a friendly team environment.
           </h2>
 
           <div className="w-60">
