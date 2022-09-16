@@ -7,6 +7,7 @@ import {
   CardsBlob,
 } from '../components'
 import { fetchProjects } from '../services/project'
+import Profile from '../assets/Profile.jpeg'
 
 interface ProjectType {
   id: string
@@ -36,6 +37,11 @@ export const Home = () => {
       <div className="w-screen relative bg-gradient-to-r from-violet-spanish to-violet-russian flex flex-col items-center px-8 pb-10 overflow-x-hidden">
         <BackgroundBlob />
         <div className="w-screen h-[800px] flex flex-col items-center justify-center z-10 overflow-hidden relative px-8">
+          <img
+            src={Profile}
+            alt="Kacperek"
+            className="rounded-full neon-multiple my-8 mb-12"
+          />
           <h1 className="text-4xl font-semibold mb-4 text-center uppercase tracking-widest text-gradient">
             Hi I'm Kacper Biegajło
           </h1>
